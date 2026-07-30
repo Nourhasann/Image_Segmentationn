@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Segment — instant object segmentation, in your browser</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">◧</span>
+      <span class="brand-name">Segment</span>
+    </div>
+    <div class="tag">runs entirely on your device — nothing uploaded, anywhere</div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>Drop a photo. Watch it get taken apart.</h1>
+      <p>Every person, car, animal, and object outlined in seconds — the model runs
+         right here in this browser tab, on your own hardware.</p>
+    </section>
+
+    <section class="workspace">
+      <div class="panel drop-panel" id="dropZone">
+        <input type="file" id="fileInput" accept="image/*" hidden />
+        <div id="dropContent">
+          <div class="drop-icon">⇪</div>
+          <p class="drop-title">Drag a photo here, or click to choose one</p>
+          <p class="drop-sub">JPG or PNG · stays on your device</p>
+          <div class="drop-buttons">
+            <button class="btn primary" id="chooseBtn">Choose photo</button>
+            <button class="btn ghost" id="cameraBtn">Use camera</button>
+          </div>
+        </div>
+        <video id="cameraVideo" autoplay playsinline hidden></video>
+        <div id="cameraControls" hidden>
+          <button class="btn primary" id="snapBtn">Capture</button>
+          <button class="btn ghost" id="cancelCameraBtn">Cancel</button>
+        </div>
+      </div>
+
+      <div class="panel result-panel" id="resultPanel" hidden>
+        <div class="canvas-wrap">
+          <canvas id="outputCanvas"></canvas>
+        </div>
+        <div class="controls-row">
+          <label class="slider-label">
+            Confidence
+            <input type="range" id="confSlider" min="0.1" max="0.9" step="0.05" value="0.35" />
+            <span id="confValue">0.35</span>
+          </label>
+          <button class="btn ghost small" id="resetBtn">Try another photo</button>
+        </div>
+        <div class="detections" id="detections"></div>
+      </div>
+    </section>
+
+    <section class="status-area">
+      <div id="statusLine" class="status-line">Loading model…</div>
+      <div id="progressWrap" class="progress-wrap">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+    </section>
+
+    <footer class="footnote">
+      <p>Object detection &amp; segmentation powered by a YOLOv8 model, converted to run
+         in-browser via ONNX Runtime Web. No image ever leaves this tab.</p>
+    </footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/onnxruntime-web/1.18.0/ort.min.js"></script>
+  <script src="labels.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
