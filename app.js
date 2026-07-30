@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // Config
 // ---------------------------------------------------------------------------
-const MODEL_URL = 'model/yolov8n-seg.onnx';
+const MODEL_URL = 'yolov8n-seg.onnx';
 const INPUT_SIZE = 640;
 const MASK_SIZE = 160; // proto grid size (640 / 4)
 const NUM_CLASSES = 80;
